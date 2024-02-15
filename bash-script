@@ -1,8 +1,6 @@
+touch ping-all-script
+nano ping-all-script
 
-"
-itadmin@ravens:~$ touch ping-all-script
-itadmin@ravens:~$ nano ping-all-script
-"
 
 #!/bin/bash
 echo "*** ping all machines in network ***"
@@ -10,9 +8,7 @@ ping -c 5 192.168.56.92
 ping -c 5 192.168.56.92
 ping -c 5 192.168.56.96
 
-"
 
-itadmin@ravens:~$ chmod +x ping-all-script
-itadmin@ravens:~$ ./ping-all-script
+chmod +x ping-all-script
+./ping-all-script
 
-"

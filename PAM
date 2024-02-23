@@ -1,0 +1,24 @@
+itadmin@ravens:~$ sudo nano /etc/security/time.conf
+;;david;Wk0900-1700
+su;*;david;Wk0900-1700
+
+itadmin@ravens:~$ sudo nano /etc/pam.d/su
+account required pam_time.so
+
+itadmin@ravens:~$ sudo nano /etc/pam.d/sshd
+account required pam_time.so
+
+itadmin@ravens:~$ sudo nano /etc/pam.d/login
+account required pam_time.so
+
+itadmin@ravens:~$ sudo nano /etc/pam.d/gdm-password
+account required pam_time.so
+
+# For Fedora
+
+[root@ravens ~]# sudo vi /etc/security/time.conf
+login;;david;Wk0900-1700
+su;;david;Wk0900-1700
+
+[root@ravens ~]# sudo vi /etc/pam.d/su
+account required pam_time.so

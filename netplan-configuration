@@ -1,0 +1,9 @@
+itadmin@ravens:~$ su root
+Password:
+root@ravens:/home/itadmin# 
+root@ravens:/home/itadmin# chmod 600 /etc/netplan/networkmanager.yaml
+root@ravens:/home/itadmin#
+root@ravens:/home/itadmin# exit
+itadmin@ravens:~$ sudo netplan apply networkmanager.yaml
+
+# do this for every netplan file that was listed with warnings

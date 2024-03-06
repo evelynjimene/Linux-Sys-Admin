@@ -1,0 +1,29 @@
+itadmin@ravens:~$
+
+# ssh to fedora
+
+[root@bears ~]#
+# create a password file
+
+[root@bears ~]# sudo htpasswd -c /etc/httpd/.htpasswd username
+
+# this command will prompt you to enter a password for the specified username and create password
+# configure apache to use the password file for authentication
+
+[root@bears ~]# sudo nano /etc/httpd/conf/httpd.conf
+
+# insert the following into configuration file
+
+<VirtualHost *:80>
+  DocumentRoot /var/www/html
+  <Directory /var/www/html>
+      AuthType Basic
+      AuthName "Restricted Area"
+      AuthUserFile /etc/httpd/.htpasswd
+      Require valid-user
+  </Directory>
+</VirtualHost>
+
+# after making changes to apache configuration, restart Apache service
+
+[root@bears ~]# sudo systemctl restart httpd

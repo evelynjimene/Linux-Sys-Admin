@@ -1,0 +1,64 @@
+[root@nation ~]# 
+
+itadmin@niners:~$ 
+
+
+
+itadmin@niners:~/devl/HelloWorld$ cd ~/.local/bin
+itadmin@niners:~/.local/bin$ ln -s ~/VSCode-linux-x64/code code
+itadmin@niners:~/.local/bin$ ls -la   ***should show arrow pointing to the fully qualified path to what we just did
+itadmin@niners:~/.local/bin$ cd ~devl
+
+itadmin@niners:~/devl/HelloWorld$ code . ***this opens the vs app
+
+itadmin@niners:~$ alias ***commands you can put in resource scripts
+
+
+itadmin@niners:~$ connect to fedora to install mariadb
+[root@nation ~]# dnf update
+[root@nation ~]# dnf install mariadb-server mariadb
+[root@nation ~]# systemctl start mariadb
+[root@nation ~]# systemctl enable mariadb
+[root@nation ~]# systemctl status mariadb
+[root@nation ~]# mysql_secure_installation
+select no and no and yes and no and Y and Yes
+**he messed up and I already inputte yes for disallowing root login remotely...
+
+[root@nation ~]# mysqladmin -u user -p version
+
+nano /etc/my.conf (basic config into this file) ***or*** nano /etc/mysql-mariadb.conf
+
+[root@nation ~]# firewall-cmd --add-service=mysql --permanent
+[root@nation ~]# firewall-cmd --reload
+[root@nation ~]# firewall-cd --list-ports ***or*** --list-protocols ***or***--list-services ***or*** --list-all
+
+[root@nation ~]# mysql -u root -p
+enter password
+
+MariaDB [(none)]> CREATE DATABASE peopledb;
+MariaDB [(none)]> CREATE USER 'testuser'@'localhost' IDENTIFIED BY 'password';
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON peopledb.* TO 'testuser'@'localhost';
+MariaDB [(none)]> FLUSH PRIVILEGES;
+MariaDB [(none)]> USE peopledb;
+MariaDB [(peopledb)]> CREATE TABLE person_table(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(255) NOT NULL,
+	email VARCHAR(255),
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
+MariaDB [(peopledb)]> INSERT INTO person_table (name, email) VALUES ('Alice Anderson', 'aanderson@uw.edu'), ('Michelle Crosby', 'mbcrosby@uw.edu');
+MariaDB [(peopledb)]> SELECT * FROM person_table;
+***shows table***
+add more people
+MariaDB [(peopledb)]> UPDATE person_table
+	SET email = 'bob.bradshaw@uw.edu'
+	WHERE name = 'Bob Bradshaw';
+MariaDB [(peopledb)]> DELETE FROM person_table WHERE name= 'Michelle Crosby';
+
+
+
+
+ 
+	
+
+

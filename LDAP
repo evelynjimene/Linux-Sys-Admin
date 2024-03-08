@@ -1,0 +1,40 @@
+itadmin@ravens:~$ su root
+root@ravens:~#
+root@ravens:~# slappasswd
+# enter password for user and copy the {SSHA} 
+root@ravens:~#
+root@ravens:~#
+#create new base group for OpenLdap users
+root@ravens:~# nano base-groups.ldif
+# enter this in nano file
+dn: ou=people,dc=nfldotnet,dc=net
+objectClass: organizationalUnit
+ou: people
+
+dn: ou=groups,dc=nfldotnet,dc=net
+objectClass: organizationalUnit
+ou: groups
+# to add the base group
+root@ravens:~# ldapadd -x -D cn=admin,dc=nfldotnet,dc=net -W -f base-groups.ldif
+# run the following command to confirm that the group has been added
+root@ravens:~# ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:///
+# create new user file
+root@ravens:~# user_alice.ldif
+# enter this in nano file
+dn:uid=alice,ou=people,dc=nfldotnet,dc=net
+objectClass: top
+objectClass: account
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: alice
+uid: alice
+userPassword: # enter {SSHA} here
+loginShell: /bin/bash
+uidNumber: 2000
+gidNUmber: 2000
+homeDirectory: /home/itadmin
+gecos: alice
+shadowLastChange: 0
+shadowMax: 0
+# to add user to the people group, run the following command
+root@ravens:~# ldapadd -x -D cn=admin,dc=nfldotnet,dc=net -W -f user_alice.ldif
